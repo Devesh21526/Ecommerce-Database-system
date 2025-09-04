@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Business Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="login-page" class="login-container">
+        <div class="login-card">
+            <h1 class="login-title">E-Business Management System</h1>
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label class="form-label">User Role</label>
+                    <select id="user-role" class="form-control">
+                        <option value="">Select your role</option>
+                        <option value="admin">Administrator</option>
+                        <option value="supplier">Supplier</option>
+                        <option value="customer">Customer</option>
+                        <option value="delivery_agent">Delivery Agent</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password">
+                </div>
+                <button type="submit" class="btn btn--primary btn--full-width">Login</button>
+                <div id="login-error" class="error-message hidden"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="app" class="app-container hidden">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <h2 id="dashboard-title" class="dashboard-title">Dashboard</h2>
+                <div class="user-info">
+                    <span id="user-name">User</span>
+                    <button id="logout-btn" class="btn btn--secondary btn--sm">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar Navigation -->
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-content">
+                <ul id="nav-menu" class="nav-menu">
+                    <!-- Navigation items will be populated by JavaScript -->
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Admin Dashboard -->
+            <div id="admin-dashboard" class="dashboard-content hidden">
+                <div class="dashboard-grid">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>Total Users</h3>
+                            <div class="stat-number" id="total-users">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Total Orders</h3>
+                            <div class="stat-number" id="total-orders">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Monthly Revenue</h3>
+                            <div class="stat-number" id="monthly-revenue">$0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Active Suppliers</h3>
+                            <div class="stat-number" id="active-suppliers">0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3>Revenue Analytics</h3>
+                        <div style="position: relative; height: 300px;">
+                            <canvas id="revenue-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3>Category Performance</h3>
+                        <div style="position: relative; height: 300px;">
+                            <canvas id="category-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="users-section">
+                    <h3>User Management</h3>
+                    <div class="table-container">
+                        <table id="users-table" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Users will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Supplier Dashboard -->
+            <div id="supplier-dashboard" class="dashboard-content hidden">
+                <div class="dashboard-actions">
+                    <button id="add-product-btn" class="btn btn--primary">Add New Product</button>
+                </div>
+
+                <div class="supplier-grid">
+                    <div class="stat-card">
+                        <h3>My Products</h3>
+                        <div class="stat-number" id="supplier-products">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Sales</h3>
+                        <div class="stat-number" id="supplier-sales">$0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Rating</h3>
+                        <div class="stat-number" id="supplier-rating">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Orders</h3>
+                        <div class="stat-number" id="supplier-orders">0</div>
+                    </div>
+                </div>
+
+                <div class="products-section">
+                    <h3>Product Inventory</h3>
+                    <div class="table-container">
+                        <table id="products-table" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    <th>Category</th>
+                                    <th>Rating</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Products will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Dashboard -->
+            <div id="customer-dashboard" class="dashboard-content hidden">
+                <div class="customer-header">
+                    <div class="wallet-info">
+                        <h3>Wallet Balance</h3>
+                        <div class="wallet-amount" id="wallet-balance">$0.00</div>
+                    </div>
+                    <div class="cart-info">
+                        <button id="cart-btn" class="btn btn--primary">
+                            Cart (<span id="cart-count">0</span>)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-filters">
+                    <input type="text" id="product-search" class="form-control" placeholder="Search products...">
+                    <select id="category-filter" class="form-control">
+                        <option value="">All Categories</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Fashion">Fashion</option>
+                        <option value="Home">Home</option>
+                    </select>
+                </div>
+
+                <div class="products-grid" id="products-grid">
+                    <!-- Products will be populated by JavaScript -->
+                </div>
+
+                <div class="orders-section">
+                    <h3>My Orders</h3>
+                    <div class="table-container">
+                        <table id="customer-orders-table" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Date</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Orders will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delivery Agent Dashboard -->
+            <div id="delivery-dashboard" class="dashboard-content hidden">
+                <div class="delivery-stats">
+                    <div class="stat-card">
+                        <h3>Total Deliveries</h3>
+                        <div class="stat-number" id="agent-deliveries">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Rating</h3>
+                        <div class="stat-number" id="agent-rating">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Earnings</h3>
+                        <div class="stat-number" id="agent-earnings">$0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Status</h3>
+                        <div class="stat-number" id="agent-status">Available</div>
+                    </div>
+                </div>
+
+                <div class="deliveries-section">
+                    <h3>Assigned Deliveries</h3>
+                    <div class="table-container">
+                        <table id="deliveries-table" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Deliveries will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Shopping Cart</h3>
+                <button class="modal-close" id="close-cart">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="cart-items">
+                    <!-- Cart items will be populated by JavaScript -->
+                </div>
+                <div class="cart-total">
+                    Total: $<span id="cart-total">0.00</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="checkout-btn" class="btn btn--primary">Checkout</button>
+                <button class="btn btn--secondary" id="close-cart-2">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div id="product-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="product-modal-title">Add Product</h3>
+                <button class="modal-close" id="close-product-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="product-form">
+                    <div class="form-group">
+                        <label class="form-label">Product Name</label>
+                        <input type="text" id="product-name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Price</label>
+                        <input type="number" id="product-price" class="form-control" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <select id="product-category" class="form-control" required>
+                            <option value="">Select category</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Fashion">Fashion</option>
+                            <option value="Home">Home</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Stock</label>
+                        <input type="number" id="product-stock" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea id="product-description" class="form-control" rows="3" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" form="product-form" class="btn btn--primary">Save Product</button>
+                <button class="btn btn--secondary" id="cancel-product">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
