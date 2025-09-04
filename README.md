@@ -1,42 +1,50 @@
+E-commerce Business Management System (EBMS)DescriptionThe E-commerce Business Management System (EBMS) is a full-stack application designed to provide a comprehensive dashboard for managing and analyzing e-commerce data. It features a Node.js backend API that connects to a SQL database and a frontend dashboard for data visualization and interaction. The system allows for tracking sales, managing products, and gaining insights into business performance through various metrics and charts.FeaturesBackend API: A robust API built with Node.js and Express to handle data operations.Database Management: Includes SQL queries for database generation and management.Data Visualization: A web-based dashboard to visualize key business metrics.Modular Structure: Organized code with separate folders for controllers, models, routes, and utilities.Environment Configuration: Uses a .env file to manage environment variables securely.Technologies UsedBackend: Node.js, Express.jsDatabase: SQL (e.g., MySQL, PostgreSQL)Frontend: HTML, CSS, JavaScriptScripting & Charting: Python (likely for data processing or chart generation)Folder StructureHere is an overview of the main directories and files in this project:.
+├── ebms-backend-api/
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── node_modules/
+│   ├── routes/
+│   ├── utils/
+│   ├── .env
+│   ├── .gitignore
+│   ├── package-lock.json
+│   ├── package.json
+│   └── server.js
+│
+├── Ecommerce-Database-system-.../
+│   ├── Database-Generation/
+│   ├── Sql Queries/
+│   └── README.md
+│
+└── exported-assets/
+    ├── ebms-dashboard/
+    │   ├── app_1.js
+    │   ├── app.js
+    │   ├── index.html
+    │   ├── style.css
+    │   └── ...
+    ├── chart_script_1.py
+    ├── script_1.py
+    └── ...
+ebms-backend-api/: Contains the entire Node.js backend application.controllers/: Logic for handling requests.models/: Database schemas and models.routes/: API endpoint definitions.server.js: The main entry point for the backend server.Ecommerce-Database-system-.../: Contains SQL scripts for database setup and querying.exported-assets/: Contains the frontend dashboard application and Python scripts.ebms-dashboard/: The main frontend application files (HTML, CSS, JS).Getting StartedTo get a local copy up and running, follow these simple steps.PrerequisitesNode.js and npm installed: https://nodejs.org/A running SQL database instance (e.g., MySQL, PostgreSQL).Python installed (for running the Python scripts): https://www.python.org/Backend Installation & SetupNavigate to the backend directory:cd ebms-backend-api
+Install NPM packages:npm install
+Set up your environment variables:Create a .env file in the ebms-backend-api root.Add the necessary configuration (e.g., database credentials, server port). A env.example file should be created to show the required variables. For example:PORT=3000
+DB_HOST=localhost
+DB_USER=your_db_user
+DB_PASSWORD=your_db_password
+DB_NAME=ebms_db
+Set up the database:Use the SQL scripts located in the Ecommerce-Database-system-... directory to create and populate your database.Start the backend server:npm start
+Your API should now be running on the port you specified (e.g., http://localhost:3000).Frontend SetupOpen the dashboard file:Navigate to the exported-assets/ebms-dashboard/ directory.Open the index.html file in your web browser.Connect to the backend:Ensure the JavaScript files (app.js, app_1.js) are correctly configured to make API requests to your running backend server. You may need to update the base URL for the API calls.UsageOnce both the backend and frontend are running, you can open the index.html page to view the e-commerce dashboard. The dashboard will fetch data from your backend API and display visualizations and metrics about your e-commerce business.The Python scripts (chart_script.py, etc.) can be run independently for specific data processing or chart generation tasks as needed.python chart_script_1.py
+Troubleshooting"main and master are entirely different commit histories"If you see this error on GitHub when trying to create a pull request, it means your local master branch and the remote main branch have separate histories. Here is how to fix it using the command line:Fetch the latest from the remote:git fetch origin
+Checkout your main branch:git checkout main
+(If you don't have one locally, create it: git checkout -b main origin/main)Merge master into main:git merge master --allow-unrelated-histories
+Resolve conflicts if any, then add and commit the changes.git add .
+git commit -m "feat: Merge master history into main"
+Push the updated main branch:git push origin main
+(Optional) Delete the old master branch to avoid future confusion:# Delete remote master
+git push origin --delete master
 
-# **Online Retail Platform for Electronics**  
-
-## **Tech Stack**  
-- **Backend**: Python  
-- **Database**: SQL  
-
-## **Project Overview**  
-This project is a comprehensive **online retail platform for electronics** that connects multiple stakeholders, including customers, suppliers, managers, and delivery agents. The system streamlines the shopping experience by integrating **product browsing, secure transactions, inventory management, and sales analytics** into a single platform.  
-
-## **Key Features**  
-
-### **1. Customer-Facing Features**  
-- **Product Catalog**: Customers can browse an extensive catalog of electronic products, including detailed descriptions, images, and pricing information.  
-- **Search & Filtering**: Users can search for products based on categories, price range, and brands.  
-- **Secure Payments**: The platform supports multiple payment options, ensuring a secure and seamless checkout process.  
-- **Order Tracking**: Customers can track their order status in real time and receive updates on delivery progress.  
-
-### **2. Supplier & Inventory Management**  
-- **Product Management**: Suppliers can add, update, or remove product listings, including stock levels and pricing.  
-- **Inventory Tracking**: Automated stock management ensures that product availability is updated in real time, preventing overselling.  
-- **Sales Analytics**: Suppliers can generate detailed reports on sales performance, helping them optimize inventory and marketing strategies.  
-
-### **3. Managerial Controls**  
-- **User & Order Management**: Administrators can oversee user activity, manage customer queries, and handle returns or disputes.  
-- **Performance Insights**: Managers have access to data analytics, providing insights into customer behavior and market trends.  
-
-### **4. Delivery & Logistics**  
-- **Order Assignment**: Delivery agents receive assigned orders based on optimized routes for efficient dispatching.  
-- **Real-Time Status Updates**: Customers and administrators can track shipments with real-time delivery status updates.  
-
-## **System Architecture**  
-- **Frontend**: Developed using HTML and JavaScript for an intuitive user experience.  
-- **Backend**: Python-based backend that handles authentication, order processing, and business logic.  
-- **Database**: SQL-based database for storing product details, transactions, and user information.  
-
-## **Conclusion**  
-This **online retail platform** is designed to be user-friendly, secure, and efficient in handling transactions, inventory, and logistics. The system improves operational efficiency for suppliers and managers while ensuring a smooth shopping experience for customers.  
-
----
-
-This version provides a structured, detailed overview that clearly explains each component of the platform. Let me know if you’d like any modifications! 🚀
+# Delete local master
+git branch -d master
